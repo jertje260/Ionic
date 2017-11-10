@@ -1,4 +1,5 @@
 display {
+    float: left;
     position: relative;
     width: 100%;
     height: 20%;
@@ -8,11 +9,21 @@ display {
         width: 100%;
         height: 100%;
         background-color: slategray;
-        color: white;
-        font-size: 2em;
-        text-align: right;
-        vertical-align: center;
-        line-height: 100%;
+        padding: 5px;
+        position: relative;
+
+        .values {
+            color: white;
+            font-size: 2em;
+            text-align: right;
+            position: absolute;
+            top:0;
+            bottom:0;
+            right: 10px;
+            height: 50%;
+            margin: auto;
+
+        }
     }
 }
 
