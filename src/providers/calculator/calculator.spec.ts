@@ -1,5 +1,4 @@
 import { CalculatorProvider } from './calculator';
-import { TestBed } from '@angular/core/testing';
 
 describe('Doing addition tests', () => {
     var calculator = new CalculatorProvider();
