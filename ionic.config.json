@@ -1,6 +1,6 @@
 {
   "name": "Calculator",
-  "app_id": "",
+  "app_id": "442bb87f",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
