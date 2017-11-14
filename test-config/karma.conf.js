@@ -45,7 +45,7 @@ module.exports = function(config) {
     },
 
     coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+      reports: [ 'html', 'lcovonly', 'cobertura' ],
       fixWebpackSourcePaths: true
     },
     browsers: ['PhantomJS'],
@@ -54,7 +54,7 @@ module.exports = function(config) {
       outputFile: 'test.xml'
     },
 
-    reporters: config.coverage ? ['kjhtml', 'dots', 'coverage-istanbul', 'junit'] : ['kjhtml', 'dots', 'junit'],
+    reporters: ['kjhtml', 'dots', 'coverage-istanbul', 'junit', 'progress', 'coverage', 'remap-coverage'] ,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
