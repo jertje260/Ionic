@@ -6,13 +6,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { NfcPage } from '../pages/nfc/nfc';
 import { ComponentsModule } from '../components/components.module'
 import { CalculatorProvider } from '../providers/calculator/calculator';
+import { NFC } from '@ionic-native/nfc';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    NfcPage
   ],
   imports: [
     BrowserModule,
@@ -22,13 +25,14 @@ import { CalculatorProvider } from '../providers/calculator/calculator';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    NfcPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CalculatorProvider
+    CalculatorProvider,
+    NFC
   ]
 })
 export class AppModule {}
