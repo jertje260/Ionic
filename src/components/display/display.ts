@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription'
 import { CalculatorProvider } from '../../providers/calculator/calculator'
 
