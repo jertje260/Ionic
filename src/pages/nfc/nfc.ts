@@ -27,12 +27,12 @@ export class NfcPage {
 
 
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private nfc: NFC, private platform: Platform) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NfcPage');
-
     this.resumeSubscription = this.platform.resume.subscribe(() => {
       this.checkNFCEnabled();
     });
@@ -44,6 +44,7 @@ export class NfcPage {
 
 
   ionViewWillEnter() {
+
     console.log('entering nfcPage')
     this.checkNFCEnabled();
   }
@@ -59,6 +60,7 @@ export class NfcPage {
   }
 
   enabledSuccess(result: any) {
+
     console.log(result);
     this.nfcPossible = true;
     this.enabled = true;
@@ -69,6 +71,7 @@ export class NfcPage {
   enabledFailure(result: any) {
     console.log(result)
     if (result == "cordova_not_available" || result == "NO_NFC") {
+
       this.statusString = "Not possible to read NFC"
       console.log("cordova is not available, so not possible to read nfc.");
       this.enabled = false;
@@ -79,6 +82,7 @@ export class NfcPage {
       this.enabled = false;
     }
   }
+
 
   readNFCCard() {
     this.enabled = false;

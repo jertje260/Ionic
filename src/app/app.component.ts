@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { NfcPage } from '../pages/nfc/nfc';
 import { HomePage } from '../pages/home/home'
 
+
 @Component({
   templateUrl: 'app.html'
 })
