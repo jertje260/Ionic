@@ -23,9 +23,15 @@ export class CalculatorProvider {
     this.data.currentVal = 0;
   }
 
-  public GetValues(): Observable<any> {
+  public GetValuesObserver(): Observable<any> {
     return this.subject.asObservable();
   }
+
+  public GetValues():any {
+    return this.data;
+  }
+
+
 
   private SetCurrentVal(x: number) {
     this.data.currentVal = x;

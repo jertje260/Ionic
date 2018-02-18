@@ -13,7 +13,7 @@ import { CalculatorProvider } from '../../providers/calculator/calculator'
   selector: 'display',
   templateUrl: 'display.html',
 })
-export class DisplayComponent implements OnDestroy{
+export class DisplayComponent{
 
   value: number;
   operator: string;
@@ -25,7 +25,11 @@ export class DisplayComponent implements OnDestroy{
   constructor(cP: CalculatorProvider) {
     console.log('Hello DisplayComponent Component');
     this.calculatorProvider = cP;
-    this.valueSubscription = this.calculatorProvider.GetValues().subscribe(val => 
+    var values = this.calculatorProvider.GetValues();
+    this.oldValue = values.valInMem;
+    this.value = values.currentVal;
+    this.operator = values.operator;
+    this.valueSubscription = this.calculatorProvider.GetValuesObserver().subscribe(val => 
       { 
         console.log(val);
         this.oldValue = val.valInMem;
@@ -33,14 +37,4 @@ export class DisplayComponent implements OnDestroy{
         this.operator = val.operator
     });
   }
-
-  ngOnDestroy(){
-    this.valueSubscription.unsubscribe();
-    this.operatorSubscription.unsubscribe();
-  }
-
-
-
-
-
 }
