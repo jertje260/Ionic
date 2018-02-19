@@ -18,17 +18,16 @@
   <button ion-button [disabled]="!enabled" (click)="readNFCCard()">{{cardReadButtonText}}</button>
   <button ion-button (click)="showSettings()" [disabled]="!nfcPossible">Show NFC Settings</button>
 
-
-  <ion-card>
+  <ion-card *ngFor="let card of cards">
     <ion-card-content>
       <ion-row>
 
       <ion-card-title>
-        <div>First card</div>
+        <div>{{card.title}}</div>
       </ion-card-title>
     </ion-row>
       <p>
-        {{nfcOutput}}
+        {{card.id}}
       </p>
     </ion-card-content>
   </ion-card>
