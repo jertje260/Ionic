@@ -110,7 +110,6 @@ export class NfcPage {
     console.log(input);
     this.enabled = true;
     this.setDefaultText();
-    this.nfcOutput = JSON.stringify(input);
     this.addCard(input.tag);
 
   }
@@ -141,6 +140,7 @@ export class NfcPage {
       newCard.title = this.getCardTitle();
       newCard.id = card.id;
       newCard.techtypes = card.techtypes;
+      //newCard.transformedId = this.nfc.bytesToString(card.id);
       if (this.cards == null) {
         this.cards = [newCard];
       } else {

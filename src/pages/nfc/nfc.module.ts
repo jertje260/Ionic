@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { NfcPage } from './nfc';
 import { NFC } from '@ionic-native/nfc';
 import { IonicStorageModule } from '@ionic/storage';
+import { IonicModule } from 'ionic-angular';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { IonicStorageModule } from '@ionic/storage';
   imports: [
     IonicPageModule.forChild(NfcPage),
     NFC,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicModule
   ],
 })
 export class NfcPageModule {}

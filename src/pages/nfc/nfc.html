@@ -22,13 +22,16 @@
     <ion-card-content>
       <ion-row>
 
-      <ion-card-title>
-        <div>{{card.title}}</div>
-      </ion-card-title>
-    </ion-row>
-      <p>
+        <ion-card-title>
+          <div>{{card.title}}</div>
+        </ion-card-title>
+      </ion-row>
+      <ion-row>>
         {{card.id}}
-      </p>
+      </ion-row>
+      <div *ngFor="let type of card[techtypes]">
+        {{type}}
+      </div>
     </ion-card-content>
   </ion-card>
 

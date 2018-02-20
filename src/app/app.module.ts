@@ -22,6 +22,7 @@ import { StatusBar } from '@ionic-native/status-bar';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, [CalculatorProvider]),
+    IonicModule,
     ComponentsModule,
     IonicStorageModule.forRoot()
   ],
