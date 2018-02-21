@@ -6,22 +6,23 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { NfcPage } from '../pages/nfc/nfc';
 import { ComponentsModule } from '../components/components.module'
 import { CalculatorProvider } from '../providers/calculator/calculator';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { CardsProvider } from '../providers/cards/cards';
+import { CardsPage } from '../pages/cards/cards';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    NfcPage
+    CardsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp, [CalculatorProvider]),
+    IonicModule.forRoot(MyApp, [CalculatorProvider, CardsProvider]),
     IonicModule,
     ComponentsModule,
     IonicStorageModule.forRoot()
@@ -30,14 +31,15 @@ import { StatusBar } from '@ionic-native/status-bar';
   entryComponents: [
     MyApp,
     HomePage,
-    NfcPage
+    CardsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CalculatorProvider,
-    NFC
+    NFC,
+    CardsProvider
   ]
 })
 export class AppModule {}

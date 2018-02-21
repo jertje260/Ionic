@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { NfcPage } from './nfc';
+import { CardsPage } from './cards';
 import { NFC } from '@ionic-native/nfc';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicModule } from 'ionic-angular';
 
+
 @NgModule({
   declarations: [
-    NfcPage,
+    CardsPage,
   ],
   imports: [
-    IonicPageModule.forChild(NfcPage),
+    IonicPageModule.forChild(CardsPage),
     NFC,
     IonicStorageModule.forRoot(),
-    IonicModule
+    IonicModule,
   ],
 })
-export class NfcPageModule {}
+export class CardsPageModule {}

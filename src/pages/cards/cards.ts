@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { NFC } from '@ionic-native/nfc';
-import { Storage } from '@ionic/storage';
 import { Card } from '../../models/card';
+import { CardsProvider } from '../../providers/cards/cards';
 
 /**
- * Generated class for the NfcPage page.
+ * Generated class for the CardsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,11 +13,12 @@ import { Card } from '../../models/card';
 
 @IonicPage()
 @Component({
-  selector: 'page-nfc',
-  templateUrl: 'nfc.html',
+  selector: 'page-cards',
+  templateUrl: 'cards.html',
 })
-export class NfcPage {
+export class CardsPage {
 
+  
   enabled: boolean = false;
   statusString: string = "";
   nfcPossible: boolean = false;
@@ -26,21 +27,20 @@ export class NfcPage {
   cardReadButtonText: string = "Read NFC Card";
   infoText: string = ""
 
-  cards: Card[] = [];
 
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private nfc: NFC, private platform: Platform, private storage: Storage) {
-    storage.get('cards').then((cards) => this.loadCards(cards))
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private nfc: NFC, 
+    private platform: Platform, private cardsProvider: CardsProvider) {
+      this.checkNFCEnabled();
   }
 
-  loadCards(loadedCards: any) {
-    this.cards = loadedCards;
+  public getCards():Card[]{
+    return this.cardsProvider.getCards();
   }
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NfcPage');
+    console.log('ionViewDidLoad CardsPage');
     this.resumeSubscription = this.platform.resume.subscribe(() => {
       this.checkNFCEnabled();
     });
@@ -50,6 +50,9 @@ export class NfcPage {
     this.resumeSubscription.unsubscribe();
   }
 
+  cardClicked(card: Card) {
+    this.navCtrl.push('CardDetailPage', { id: card.id});
+  }
 
   ionViewWillEnter() {
 
@@ -135,65 +138,22 @@ export class NfcPage {
   }
 
   addCard(card: any): void {
-    if (!this.cardExists(card)) {
-      var newCard = new Card();
-      newCard.title = this.getCardTitle();
-      newCard.id = card.id;
-      newCard.techtypes = card.techtypes;
-      //newCard.transformedId = this.nfc.bytesToString(card.id);
-      if (this.cards == null) {
-        this.cards = [newCard];
-      } else {
-        this.cards.push(newCard);
-      }
-      this.saveCards();
-    } else {
+    
+      var newCard = new Card(card.id, this.getCardTitle(), card.techTypes);
+     if(this.cardsProvider.addCard(newCard)){
+       console.log("card Added");
+     }
+     else {
       console.log("Card already exists.");
-
     }
   }
 
   getCardTitle(): string {
-    if (this.cards == null) {
+    var cards = this.getCards();
+    if (cards == null) {
       return "Card #1";
     } else {
-      return "Card #" + (this.cards.length + 1);
+      return "Card #" + (cards.length + 1);
     }
-
-
   }
-
-  saveCards(): void {
-    this.storage.set("cards", this.cards)
-      .then(() => console.log("cards saved"))
-      .catch((reason) => {
-        console.warn("failed to store cards");
-        console.warn(reason);
-      });
-  }
-
-  cardExists(card: Card): boolean {
-    if (this.cards == null) {
-      return false;
-    }
-    for (var i = 0; i < this.cards.length; i++) {
-      if (this.idMatches(this.cards[i].id, card.id)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  idMatches(original: number[], test: number[]): boolean {
-    if (original.length != test.length) {
-      return false;
-    }
-    for (var i = 0; i < original.length; i++) {
-      if (original[i] != test[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-
 }
